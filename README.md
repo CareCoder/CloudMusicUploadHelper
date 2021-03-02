@@ -1,0 +1,2 @@
+# CloudMusicUploadHelper
+一个可以帮你轻松上传自有音乐至网易云音乐云盘的小工具
