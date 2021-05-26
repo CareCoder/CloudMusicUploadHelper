@@ -171,7 +171,7 @@ def ADD(NAME, LIST):
     if TYPE == 'ncm':
         LIST.append(unlock(NAME))
         print(" ")
-    elif TYPE in ['MP3', 'mp3', 'flac', 'FLAC']:
+    elif TYPE in ['MP3', 'mp3', 'flac', 'FLAC', 'ACC', 'acc']:
         LIST.append(NAME)
 
 
@@ -192,8 +192,7 @@ def upload(f):
     if cresult['needUpload']:
         pyncm.cloud.SetUploadObject(open(f, 'rb'), md5, fsize, token['objectKey'], token['token'])
     try:
-        submit_result = pyncm.cloud.SetUploadCloudInfo(token['resourceId'], songId, md5, fname, INFO.title, INFO.artist,
-                                                       INFO.album, INFO.bitrate)
+        submit_result = pyncm.cloud.SetUploadCloudInfo(token['resourceId'], songId, md5, fname, INFO.title, INFO.artist,INFO.album, INFO.bitrate)
         publish_result = pyncm.cloud.SetPublishCloudResource(submit_result['songId'])
     except KeyError:
         submit_result = pyncm.cloud.SetUploadCloudInfo(token['resourceId'], songId, md5, fname)
