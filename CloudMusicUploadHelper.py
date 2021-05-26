@@ -189,8 +189,9 @@ def upload(f):
     cresult = pyncm.cloud.GetCheckCloudUpload(md5)
     songId = cresult['songId']
     token = pyncm.cloud.GetNosToken(fname, md5, str(fsize), fext)['result']
-    if cresult['needUpload']:
-        pyncm.cloud.SetUploadObject(open(f, 'rb'), md5, fsize, token['objectKey'], token['token'])
+    try:
+        if cresult['needUpload']:
+            pyncm.cloud.SetUploadObject(open(f, 'rb'), md5, fsize, token['objectKey'], token['token'])
     try:
         submit_result = pyncm.cloud.SetUploadCloudInfo(token['resourceId'], songId, md5, fname, INFO.title, INFO.artist,INFO.album, INFO.bitrate)
         publish_result = pyncm.cloud.SetPublishCloudResource(submit_result['songId'])
